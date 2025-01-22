@@ -13,10 +13,10 @@ const getAllGenres = asyncHandler(async (req, res) => {
 const validateGenre = [
   body("genreName")
     .trim()
-    .isAlpha()
+    .matches(/^[a-zA-Z\s]+$/)
     .withMessage("Name must only contain letters")
-    .isLength({ min: 1, max: 20 })
-    .withMessage("Name must be between 1 and 20 letters"),
+    .isLength({ min: 2, max: 30 })
+    .withMessage("Name must be between 2 and 30 characters"),
 ];
 
 const getCreateGenre = asyncHandler(async (req, res) => {
