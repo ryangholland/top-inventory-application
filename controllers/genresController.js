@@ -4,7 +4,6 @@ const { body, validationResult, query } = require("express-validator");
 
 const getAllGenres = asyncHandler(async (req, res) => {
   const genres = await db.getAllGenres();
-  // console.log(genres)
   res.render("genres", {
     title: "Genres",
     genres: genres,
@@ -46,7 +45,6 @@ const postCreateGenre = [
 
 const getUpdateGenre = asyncHandler(async (req, res) => {
   const genre = await db.getGenreById(req.params.id);
-  console.log(genre)
   res.render("updateGenre", {
     title: "Edit Genre",
     genre: genre,
@@ -67,18 +65,22 @@ const postUpdateGenre = [
     }
     const { genreName } = req.body;
 
-    // db query to update genre
-    console.log(`Updating ${genre.name} to ${genreName}...`)
     await db.updateGenre(genre.id, genreName)
 
     res.redirect("/genres")
   })
 ]
 
+const postDeleteGenre = asyncHandler(async (req, res) => {
+  await db.deleteGenre(req.params.id)
+  res.redirect("/genres")
+})
+
 module.exports = {
   getAllGenres,
   getCreateGenre,
   postCreateGenre,
   getUpdateGenre,
-  postUpdateGenre
+  postUpdateGenre,
+  postDeleteGenre
 };

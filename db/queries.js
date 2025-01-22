@@ -44,7 +44,16 @@ async function updateGenre(id, newName) {
       id,
     ]);
   } catch (err) {
-    console.error("Error updating genre: ", err);
+    console.error("Error updating genre:", err);
+    throw err;
+  }
+}
+
+async function deleteGenre(id) {
+  try {
+    await pool.query("DELETE FROM genres WHERE id = $1", [id]);
+  } catch (err) {
+    console.error("Error deleting genre:", err);
     throw err;
   }
 }
@@ -55,5 +64,6 @@ module.exports = {
   getAllGenres,
   getGenreById,
   insertGenre,
-  updateGenre
+  updateGenre,
+  deleteGenre,
 };
