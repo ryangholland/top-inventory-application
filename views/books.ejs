@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h2><%= title %></h2>
+    <hr />
+    <table border="1" id="booksTable">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Genre</th>
+          <th>Pages</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (locals.books) {%> <% books.forEach(book => { %>
+        <tr>
+          <td><%= book.book_title %></td>
+          <td><%= book.author_name %></td>
+          <td><%= book.genre_name %></td>
+          <td><%= book.pages %></td>
+        </tr>
+        <% }) %> <% } %>
+      </tbody>
+    </table>
+
+    <br />
+    <a href="/">Index</a>
+  </body>
+</html>

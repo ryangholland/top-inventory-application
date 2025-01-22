@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h2><%= title %></h2>
+    <hr />
+    <table border="1" id="booksTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (locals.genres) {%> <% genres.forEach(genre => { %>
+        <tr>
+          <td><%= genre.name %></td>
+        </tr>
+        <% }) %> <% } %>
+      </tbody>
+    </table>
+
+    <br />
+    <a href="/">Index</a>
+  </body>
+</html>
