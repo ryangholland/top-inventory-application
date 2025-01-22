@@ -28,8 +28,32 @@ async function getAllGenres() {
   return rows;
 }
 
+async function getGenreById(id) {
+  const { rows } = await pool.query(`SELECT * FROM genres WHERE id = $1`, [id]);
+  return rows[0];
+}
+
+async function insertGenre(genreName) {
+  await pool.query("INSERT INTO genres (name) VALUES ($1)", [genreName]);
+}
+
+async function updateGenre(id, newName) {
+  try {
+    await pool.query("UPDATE genres SET name = $1 WHERE id = $2", [
+      newName,
+      id,
+    ]);
+  } catch (err) {
+    console.error("Error updating genre: ", err);
+    throw err;
+  }
+}
+
 module.exports = {
   getAllBooks,
   getAllAuthors,
   getAllGenres,
+  getGenreById,
+  insertGenre,
+  updateGenre
 };

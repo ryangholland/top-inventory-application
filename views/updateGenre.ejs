@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h2><%= title %></h2>
+    
+    <%- include("partials/errors.ejs") %>
+    <form action="/genres/<%= genre.id %>/update" method="POST">
+      <label for="genreName">Name: </label>
+      <input type="text" name="genreName" id="genreName" value="<%= genre.name %>" required />
+      <button type="submit">Submit</button>
+    </form>
+    <a href="/genres">Back</a>
+  </body>
+</html>
