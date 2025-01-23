@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const db = require("../db/queries");
+const db = require("../db/queries/genres");
 const { body, validationResult, query } = require("express-validator");
 
 const getAllGenres = asyncHandler(async (req, res) => {

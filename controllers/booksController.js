@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const db = require("../db/queries");
+const db = require("../db/queries/books");
 
 const getAllBooks = asyncHandler(async (req, res) => {
   const books = await db.getAllBooks();
