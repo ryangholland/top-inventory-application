@@ -4,7 +4,7 @@ const db = require("../db/queries/authors");
 const getAllAuthors = asyncHandler(async (req, res) => {
   const authors = await db.getAllAuthors();
   // console.log(authors)
-  res.render("authors", {
+  res.render("authors/authors", {
     title: "Authors",
     authors: authors,
   });

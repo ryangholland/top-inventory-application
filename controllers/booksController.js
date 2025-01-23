@@ -4,7 +4,7 @@ const db = require("../db/queries/books");
 const getAllBooks = asyncHandler(async (req, res) => {
   const books = await db.getAllBooks();
   // console.log(books);
-  res.render("books", {
+  res.render("books/books", {
     title: "Books",
     books: books,
   });

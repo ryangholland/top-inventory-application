@@ -4,7 +4,7 @@ const { body, validationResult, query } = require("express-validator");
 
 const getAllGenres = asyncHandler(async (req, res) => {
   const genres = await db.getAllGenres();
-  res.render("genres", {
+  res.render("genres/genres", {
     title: "Genres",
     genres: genres,
   });
@@ -20,7 +20,7 @@ const validateGenre = [
 ];
 
 const getCreateGenre = asyncHandler(async (req, res) => {
-  res.render("createGenre", {
+  res.render("genres/createGenre", {
     title: "Add Genre",
   });
 });
@@ -30,7 +30,7 @@ const postCreateGenre = [
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render("createGenre", {
+      return res.status(400).render("genres/createGenre", {
         title: "Add Genre",
         errors: errors.array(),
       });
@@ -45,7 +45,7 @@ const postCreateGenre = [
 
 const getUpdateGenre = asyncHandler(async (req, res) => {
   const genre = await db.getGenreById(req.params.id);
-  res.render("updateGenre", {
+  res.render("genres/updateGenre", {
     title: "Edit Genre",
     genre: genre,
   });
@@ -57,7 +57,7 @@ const postUpdateGenre = [
     const genre = await db.getGenreById(req.params.id);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render("updateGenre", {
+      return res.status(400).render("genres/updateGenre", {
         title: "Edit Genre",
         genre: genre,
         errors: errors.array(),
