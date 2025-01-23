@@ -27,7 +27,7 @@ async function insertAuthor(firstName, lastName) {
 async function updateAuthor(id, newFirstName, newLastName) {
   try {
     await pool.query(
-      "UPDATE authors SET first_name = $1, last_name = $1 WHERE id = $3",
+      "UPDATE authors SET first_name = $1, last_name = $2 WHERE id = $3",
       [newFirstName, newLastName, id]
     );
   } catch (err) {
