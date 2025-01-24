@@ -60,6 +60,45 @@ const postCreateBook = [
   }),
 ];
 
+const getUpdateBook = asyncHandler(async (req, res) => {
+  const book = await db.getBookById(req.params.id);
+  const authors = await getAllAuthors();
+  const genres = await getAllGenres();
+  res.render("books/updateBook", {
+    title: "Edit Book",
+    book: book,
+    authors: authors,
+    genres: genres,
+  });
+});
+
+const postUpdateBook = [
+  validateBook,
+  asyncHandler(async (req, res) => {
+    const book = await db.getBookById(req.params.id);
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const authors = await getAllAuthors();
+      const genres = await getAllGenres();
+      return res.status(400).render("books/updateBook", {
+        title: "Edit Book",
+        book: book,
+        authors: authors,
+        genres: genres,
+        errors: errors.array(),
+      });
+    }
+
+    const { title, author_id, genre_id, pages } = req.body;
+    const pagesValue = pages ? parseInt(pages, 10) : null;
+
+    await db.updateBook(book.id, title, author_id, genre_id, pagesValue);
+
+    res.redirect("/books");
+  }),
+];
+
 const postDeleteBook = asyncHandler(async (req, res) => {
   await db.deleteBook(req.params.id);
   res.redirect("/books");
@@ -69,5 +108,7 @@ module.exports = {
   getAllBooks,
   getCreateBook,
   postCreateBook,
-  postDeleteBook
+  getUpdateBook,
+  postUpdateBook,
+  postDeleteBook,
 };
