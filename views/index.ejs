@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title><%= title %></title>
-</head>
-<body>
-    <h1><%= title %></h1>
-    <hr>
-    <ul>
-        <li><a href="/books">Books</a></li>
-        <li><a href="/authors">Authors</a></li>
-        <li><a href="/genres">Genres</a></li>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <h1 class="mt-2 ms-4"><%= title %></h1>
+    <hr />
+    <ul class="nav flex-column ms-4">
+      <li class="nav-item">
+        <a class="nav-link" href="/books"
+          ><i class="fa-solid fa-book"></i> Books</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/authors"
+          ><i class="fa-solid fa-user"></i> Authors</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/genres"
+          ><i class="fa-solid fa-tags"></i> Genres</a
+        >
+      </li>
     </ul>
-    
-</body>
+  </body>
 </html>
