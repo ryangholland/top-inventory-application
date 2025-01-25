@@ -2,22 +2,33 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
   </head>
-  <body>
-    <h2><%= title %></h2>
+  <body class="mt-2 ms-4 container bg-light">
+    <h2><i class="fa-solid fa-book"></i> <%= title %></h2>
     <%- include("../partials/errors.ejs") %>
-    <form action="/books/<%= book.id %>/update" method="POST">
-      <label for="title">Title: </label>
+    <form action="/books/<%= book.id %>/update" method="POST" style="max-width: 600px;">
+      
+      <div class="mb-3">
+      <label for="title" class="form-label">Title: </label>
       <input
         type="text"
         name="title"
         id="title"
         value="<%= book.title %>"
+        class="form-control"
         required
       />
+      </div>
 
-      <label for="author">Author:</label>
-      <select name="author_id" id="author" required>
+      <div class="mb-3">
+      <label for="author" class="form-label">Author:</label>
+      <select name="author_id" id="author" class="form-select" required>
         <option value="">-- Select Author --</option>
         <% authors.forEach(author => { %>
         <option value="<%= author.id %>" <%= author.id === book.author_id ? 'selected' : '' %> >
@@ -25,19 +36,31 @@
         </option>
         <% }); %>
       </select>
+      </div>
 
-      <label for="genre">Genre:</label>
-      <select name="genre_id" id="genre" required>
+      <div class="mb-3">
+      <label for="genre" class="form-label">Genre:</label>
+      <select name="genre_id" id="genre" class="form-select" required>
         <option value="">-- Select Genre --</option>
         <% genres.forEach(genre => { %>
         <option value="<%= genre.id %>" <%= genre.id === book.genre_id ? 'selected' : '' %>><%= genre.name %></option>
         <% }); %>
       </select>
+      </div>
 
-      <label for="pages">Pages: </label>
-      <input type="number" min="2" max="99999" name="pages" id="pages" value="<%= book.pages !== null ? book.pages : '' %>"  />
-      <button type="submit">Submit</button>
+      <div class="mb-3">
+      <label for="pages" class="form-label">Pages: </label>
+      <input type="number" min="2" max="99999" name="pages" id="pages" class="form-control" value="<%= book.pages !== null ? book.pages : '' %>"  />
+      </div>
+
+      <button type="submit" class="btn btn-success mb-2">Submit</button>
     </form>
-    <a href="/books">Back</a>
+
+    <hr>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="/books"> Back</a>
+      </li>
+    </ul>
   </body>
 </html>

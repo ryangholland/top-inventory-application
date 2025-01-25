@@ -2,16 +2,29 @@
 <html lang="en">
   <head>
     <title><%= title %></title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
   </head>
-  <body>
-    <h2><%= title %></h2>
+  <body class="mt-2 ms-4 container bg-light">
+    <h2><i class="fa-solid fa-book"></i> <%= title %></h2>
     <hr />
 
-    <a href="/books/create">Add Book</a>
+    
+   
+
+    <a href="/books/create"
+      ><button type="button" class="btn btn-success">
+        <i class="fa-solid fa-plus"></i> Add Book
+      </button></a
+    >
     <br />
     <br />
 
-    <table border="1" id="booksTable">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th>Title</th>
@@ -24,14 +37,17 @@
       <tbody>
         <% if (locals.books) {%> <% books.forEach(book => { %>
         <tr>
-          <td><%= book.book_title %> </td>
-          <td><%= book.author_name %></td>
-          <td><%= book.genre_name %></td>
-          <td><%= book.pages %></td>
+          <td class="align-middle"><%= book.book_title %></td>
+          <td class="align-middle"><%= book.author_name %></td>
+          <td class="align-middle"><%= book.genre_name %></td>
+          <td class="align-middle"><%= book.pages %></td>
 
-          <td>
-            <a href="/books/<%= book.book_id %>/update"><button>Edit</button></a>
-            |
+          <td >
+            <a href="/books/<%= book.book_id %>/update"
+              ><button type="button" class="btn btn-warning">
+                <i class="fa-solid fa-pencil"></i></button
+            ></a>
+
             <form
               action="/books/<%= book.book_id %>/delete"
               method="POST"
@@ -39,9 +55,10 @@
             >
               <button
                 type="submit"
+                class="btn btn-danger"
                 onclick="return confirm('Are you sure you want to delete this book?');"
               >
-                Delete
+                <i class="fa-solid fa-trash"></i>
               </button>
             </form>
           </td>
@@ -50,7 +67,10 @@
       </tbody>
     </table>
 
-    <br />
-    <a href="/">Index</a>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="/"><i class="fa-solid fa-house"></i> Index</a>
+      </li>
+    </ul>
   </body>
 </html>
