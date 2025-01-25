@@ -11,6 +11,7 @@
   </head>
   <body class="mt-2 ms-4 container bg-light">
     <h2><i class="fa-solid fa-book"></i> <%= title %></h2>
+    <hr />
     <%- include("../partials/errors.ejs") %>
     <form action="/books/<%= book.id %>/update" method="POST" style="max-width: 600px;">
       

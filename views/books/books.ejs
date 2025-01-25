@@ -13,9 +13,6 @@
     <h2><i class="fa-solid fa-book"></i> <%= title %></h2>
     <hr />
 
-    
-   
-
     <a href="/books/create"
       ><button type="button" class="btn btn-success">
         <i class="fa-solid fa-plus"></i> Add Book
@@ -42,7 +39,7 @@
           <td class="align-middle"><%= book.genre_name %></td>
           <td class="align-middle"><%= book.pages %></td>
 
-          <td >
+          <td>
             <a href="/books/<%= book.book_id %>/update"
               ><button type="button" class="btn btn-warning">
                 <i class="fa-solid fa-pencil"></i></button
@@ -66,6 +63,8 @@
         <% }) %> <% } %>
       </tbody>
     </table>
+
+    <hr />
 
     <ul class="nav flex-column">
       <li class="nav-item">

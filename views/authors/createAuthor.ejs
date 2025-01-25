@@ -2,17 +2,45 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
   </head>
-  <body>
-    <h2><%= title %></h2>
+  <body class="mt-2 ms-4 container bg-light">
+    <h2><i class="fa-solid fa-user"></i> <%= title %></h2>
+    <hr />
     <%- include("../partials/errors.ejs") %>
-    <form action="/authors/create" method="POST">
-      <label for="firstName">First Name: </label>
-      <input type="text" name="firstName" id="firstName" required />
-      <label for="lastName">Last Name: </label>
-      <input type="text" name="lastName" id="lastName" required />
-      <button type="submit">Submit</button>
+    <form action="/authors/create" method="POST" style="max-width: 600px">
+      <div class="mb-3">
+        <label for="firstName" class="form-label">First Name: </label>
+        <input
+          type="text"
+          class="form-control"
+          name="firstName"
+          id="firstName"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Last Name: </label>
+        <input
+          type="text"
+          class="form-control"
+          name="lastName"
+          id="lastName"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-success mb-2">Submit</button>
     </form>
-    <a href="/authors">Back</a>
+    <hr />
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="/authors"> Back</a>
+      </li>
+    </ul>
   </body>
 </html>
