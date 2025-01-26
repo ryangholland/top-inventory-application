@@ -13,14 +13,14 @@ const getAllAuthors = asyncHandler(async (req, res) => {
 const validateAuthor = [
   body("firstName")
     .trim()
-    .matches(/^[a-zA-Z\s]+$/)
-    .withMessage("First name must only contain letters")
+    .matches(/^[a-zA-Z\s\-\'.]+$/)
+    .withMessage("First name must only contain letters and certain punctuation")
     .isLength({ min: 2, max: 20 })
     .withMessage("First name must be between 2 and 20 characters"),
   body("lastName")
     .trim()
-    .matches(/^[a-zA-Z\s]+$/)
-    .withMessage("Last name must only contain letters")
+    .matches(/^[a-zA-Z\s\-\'.]+$/)
+    .withMessage("Last name must only contain letters and certain punctuation")
     .isLength({ min: 2, max: 20 })
     .withMessage("Last name must be between 2 and 20 characters"),
 ];

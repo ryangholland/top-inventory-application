@@ -9,7 +9,7 @@ const genresRouter = require("./routes/genresRouter");
 const app = express();
 
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
-app.use('/@fortawesome', express.static(__dirname + '/node_modules/@fortawesome'));
+app.use('/@fortawesome', express.static(path.join(__dirname, 'node_modules/@fortawesome')))
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
