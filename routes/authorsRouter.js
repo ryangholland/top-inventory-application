@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const {
-  getAllAuthors,
+  getAuthors,
   getCreateAuthor,
   postCreateAuthor,
   getUpdateAuthor,
@@ -10,7 +10,7 @@ const {
 
 const authorsRouter = Router();
 
-authorsRouter.get("/", getAllAuthors);
+authorsRouter.get("/", getAuthors);
 
 authorsRouter.get("/create", getCreateAuthor);
 authorsRouter.post("/create", postCreateAuthor);

@@ -21,12 +21,16 @@
     <br />
     <br />
 
-    <div class=" mb-4 d-flex align-items-end">
-      
-      <form class="d-flex input-group" action="/genres" method="GET" style="max-width: 600px">
+    <div class="mb-4 d-flex align-items-end">
+      <form
+        class="d-flex input-group"
+        action="/genres"
+        method="GET"
+        style="max-width: 600px"
+      >
         <!-- Search Input -->
         <input
-          class="form-control "
+          class="form-control"
           type="input"
           name="search"
           placeholder="Search for a genre"
@@ -36,7 +40,7 @@
         />
         <!-- Submit Button -->
         <button class="btn btn-primary" type="submit">
-          <i class="fas fa-search"></i> 
+          <i class="fas fa-search"></i>
         </button>
       </form>
 
@@ -59,7 +63,7 @@
               ><button type="button" class="btn btn-warning">
                 <i class="fa-solid fa-pencil"></i></button
             ></a>
-            
+
             <form
               action="/genres/<%= genre.id %>/delete"
               method="POST"

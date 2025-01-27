@@ -21,6 +21,32 @@
     <br />
     <br />
 
+    <div class="mb-4 d-flex align-items-end">
+      <form
+        class="d-flex input-group"
+        action="/authors"
+        method="GET"
+        style="max-width: 600px"
+      >
+        <!-- Search Input -->
+        <input
+          class="form-control"
+          type="input"
+          name="search"
+          placeholder="Search for an author"
+          aria-label="Search"
+          value="<%= lastSearch %>"
+          required
+        />
+        <!-- Submit Button -->
+        <button class="btn btn-primary" type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+
+      <h6 class="ms-4"><a href="/authors">Clear Search</a></h6>
+    </div>
+
     <table class="table table-striped">
       <thead>
         <tr>

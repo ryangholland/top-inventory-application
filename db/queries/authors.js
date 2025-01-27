@@ -5,6 +5,21 @@ async function getAllAuthors() {
   return rows;
 }
 
+async function searchAuthors(searchTerm) {
+  const { rows } = await pool.query(
+    `SELECT 
+      id AS author_id,
+      first_name,
+      last_name
+    FROM Authors
+    WHERE 
+      first_name ILIKE '%' || $1 || '%' OR
+      last_name ILIKE '%' || $1 || '%'`,
+    [searchTerm]
+  );
+  return rows;
+}
+
 async function getAuthorById(id) {
   const { rows } = await pool.query(`SELECT * FROM authors WHERE id = $1`, [
     id,
@@ -47,8 +62,9 @@ async function deleteAuthor(id) {
 
 module.exports = {
   getAllAuthors,
+  searchAuthors,
   getAuthorById,
   insertAuthor,
   updateAuthor,
-  deleteAuthor
+  deleteAuthor,
 };

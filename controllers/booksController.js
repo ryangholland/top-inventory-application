@@ -2,13 +2,19 @@ const asyncHandler = require("express-async-handler");
 const db = require("../db/queries/books");
 const { getAllAuthors } = require("../db/queries/authors");
 const { getAllGenres } = require("../db/queries/genres");
-const { body, validationResult, query } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 
-const getAllBooks = asyncHandler(async (req, res) => {
-  const books = await db.getAllBooks();
+const getBooks = asyncHandler(async (req, res) => {
+  let books = await db.getAllBooks();
+  if (req.query.search) {
+    books = await db.searchBooks(req.query.search)
+  } else {
+    books = await db.getAllBooks()
+  }
   res.render("books/books", {
     title: "Books",
     books: books,
+    lastSearch: req.query.search
   });
 });
 
@@ -105,7 +111,7 @@ const postDeleteBook = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  getAllBooks,
+  getBooks,
   getCreateBook,
   postCreateBook,
   getUpdateBook,

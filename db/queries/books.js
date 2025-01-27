@@ -18,6 +18,27 @@ async function getAllBooks() {
   return rows;
 }
 
+async function searchBooks(searchTerm) {
+  const { rows } = await pool.query(
+    `
+    SELECT 
+      b.id AS book_id, 
+      b.title AS book_title, 
+      b.pages, 
+      g.name AS genre_name, 
+   CONCAT(a.first_name, ' ', a.last_name) AS author_name
+    FROM Books b
+    JOIN Genres g ON b.genre_id = g.id
+    JOIN Authors a ON b.author_id = a.id
+    WHERE 
+      b.title ILIKE '%' || $1 || '%' OR
+      g.name ILIKE '%' || $1 || '%' OR
+    CONCAT(a.first_name, ' ', a.last_name) ILIKE '%' || $1 || '%'`,
+    [searchTerm]
+  );
+  return rows;
+}
+
 async function getBookById(id) {
   const { rows } = await pool.query(`SELECT * FROM books WHERE id = $1`, [id]);
   return rows[0];
@@ -58,6 +79,7 @@ async function deleteBook(id) {
 
 module.exports = {
   getAllBooks,
+  searchBooks,
   getBookById,
   insertBook,
   updateBook,

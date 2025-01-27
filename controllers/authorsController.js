@@ -1,12 +1,18 @@
 const asyncHandler = require("express-async-handler");
 const db = require("../db/queries/authors");
-const { body, validationResult, query } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 
-const getAllAuthors = asyncHandler(async (req, res) => {
-  const authors = await db.getAllAuthors();
+const getAuthors = asyncHandler(async (req, res) => {
+  let authors;
+  if (req.query.search) {
+    authors = await db.searchAuthors(req.query.search);
+  } else {
+    authors = await db.getAllAuthors();
+  }
   res.render("authors/authors", {
     title: "Authors",
     authors: authors,
+    lastSearch: req.query.search,
   });
 });
 
@@ -83,7 +89,7 @@ const postDeleteAuthor = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  getAllAuthors,
+  getAuthors,
   getCreateAuthor,
   postCreateAuthor,
   getUpdateAuthor,

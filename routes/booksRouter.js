@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const {
-  getAllBooks,
+  getBooks,
   getCreateBook,
   postCreateBook,
   getUpdateBook,
@@ -10,7 +10,7 @@ const {
 
 const booksRouter = Router();
 
-booksRouter.get("/", getAllBooks);
+booksRouter.get("/", getBooks);
 
 booksRouter.get("/create", getCreateBook);
 booksRouter.post("/create", postCreateBook);
