@@ -5,18 +5,27 @@ async function getAllAuthors() {
   return rows;
 }
 
-async function searchAuthors(searchTerm) {
-  const { rows } = await pool.query(
-    `SELECT 
-      id AS author_id,
-      first_name,
-      last_name
-    FROM Authors
-    WHERE 
+async function searchAuthors(searchTerm, sortTerm) {
+  const validSortTerms = ["first_name", "last_name"];
+  if (sortTerm && !validSortTerms.includes(sortTerm)) {
+    throw new Error("Invalid sort term");
+  }
+
+  let query = `SELECT * FROM authors`;
+  const params = [];
+
+  if (searchTerm) {
+    query += ` WHERE 
       first_name ILIKE '%' || $1 || '%' OR
-      last_name ILIKE '%' || $1 || '%'`,
-    [searchTerm]
-  );
+      last_name ILIKE '%' || $1 || '%'`;
+    params.push(searchTerm);
+  }
+
+  if (sortTerm) {
+    query += ` ORDER BY ${sortTerm}`;
+  }
+
+  const { rows } = await pool.query(query, params);
   return rows;
 }
 

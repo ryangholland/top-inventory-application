@@ -44,16 +44,40 @@
         </button>
       </form>
 
-      <h6 class="ms-4"><a href="/books">Clear Search</a></h6>
+      <h6 class="ms-4"><a href="/books">Clear Filters</a></h6>
     </div>
 
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Genre</th>
-          <th>Pages</th>
+          <th>
+            <a
+              href="/books?sort=book_title&search=<%= lastSearch %>"
+              class="link-secondary text-black link-underline-opacity-0"
+              >Title</a
+            >
+          </th>
+          <th>
+            <a
+              href="/books?sort=author_name&search=<%= lastSearch %>"
+              class="link-secondary text-black link-underline-opacity-0"
+              >Author</a
+            >
+          </th>
+          <th>
+            <a
+              href="/books?sort=genre_name&search=<%= lastSearch %>"
+              class="link-secondary text-black link-underline-opacity-0"
+              >Genre</a
+            >
+          </th>
+          <th>
+            <a
+              href="/books?sort=pages&search=<%= lastSearch %>"
+              class="link-secondary text-black link-underline-opacity-0"
+              >Pages</a
+            >
+          </th>
           <th>Actions</th>
         </tr>
       </thead>

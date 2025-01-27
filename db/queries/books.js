@@ -18,10 +18,15 @@ async function getAllBooks() {
   return rows;
 }
 
-async function searchBooks(searchTerm) {
-  const { rows } = await pool.query(
-    `
-    SELECT 
+async function searchBooks(searchTerm, sortTerm) {
+  const validSortTerms = ["book_title", "author_name", "genre_name", "pages"];
+  if (sortTerm && !validSortTerms.includes(sortTerm)) {
+    throw new Error("Invalid sort term");
+  }
+
+  if (sortTerm == "author_name") sortTerm = "a.last_name";
+
+  let query = `SELECT 
       b.id AS book_id, 
       b.title AS book_title, 
       b.pages, 
@@ -29,13 +34,26 @@ async function searchBooks(searchTerm) {
    CONCAT(a.first_name, ' ', a.last_name) AS author_name
     FROM Books b
     JOIN Genres g ON b.genre_id = g.id
-    JOIN Authors a ON b.author_id = a.id
-    WHERE 
+    JOIN Authors a ON b.author_id = a.id`;
+  const params = [];
+
+  if (searchTerm) {
+    query += ` WHERE 
       b.title ILIKE '%' || $1 || '%' OR
       g.name ILIKE '%' || $1 || '%' OR
-    CONCAT(a.first_name, ' ', a.last_name) ILIKE '%' || $1 || '%'`,
-    [searchTerm]
-  );
+    CONCAT(a.first_name, ' ', a.last_name) ILIKE '%' || $1 || '%'`;
+    params.push(searchTerm);
+  }
+
+  if (sortTerm) {
+    query += ` ORDER BY ${sortTerm}`;
+  }
+
+  if (sortTerm == "pages") {
+    query += ` DESC`;
+  }
+
+  const { rows } = await pool.query(query, params);
   return rows;
 }
 

@@ -5,9 +5,10 @@ const { getAllGenres } = require("../db/queries/genres");
 const { body, validationResult } = require("express-validator");
 
 const getBooks = asyncHandler(async (req, res) => {
-  let books = await db.getAllBooks();
-  if (req.query.search) {
-    books = await db.searchBooks(req.query.search)
+  let books;
+  
+  if (req.query.search || req.query.sort) {
+    books = await db.searchBooks(req.query.search, req.query.sort)
   } else {
     books = await db.getAllBooks()
   }
