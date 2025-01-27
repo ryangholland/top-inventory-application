@@ -21,6 +21,27 @@
     <br />
     <br />
 
+    <div class=" mb-4 d-flex align-items-end">
+      
+      <form class="d-flex input-group" action="/genres" method="GET" style="max-width: 600px">
+        <!-- Search Input -->
+        <input
+          class="form-control "
+          type="search"
+          name="query"
+          placeholder="Search for a genre"
+          aria-label="Search"
+          required
+        />
+        <!-- Submit Button -->
+        <button class="btn btn-primary" type="submit">
+          <i class="fas fa-search"></i> 
+        </button>
+      </form>
+
+      <h6 class="ms-4"><a href="/genres">Clear Search</a></h6>
+    </div>
+
     <table class="table table-striped">
       <thead>
         <tr>
