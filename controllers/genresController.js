@@ -1,12 +1,18 @@
 const asyncHandler = require("express-async-handler");
 const db = require("../db/queries/genres");
-const { body, validationResult, query } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 
-const getAllGenres = asyncHandler(async (req, res) => {
-  const genres = await db.getAllGenres();
+const getGenres = asyncHandler(async (req, res) => {
+  let genres;
+  if (req.query.search) {
+    genres = await db.searchGenres(req.query.search);
+  } else {
+    genres = await db.getAllGenres();
+  }
   res.render("genres/genres", {
     title: "Genres",
     genres: genres,
+    lastSearch: req.query.search,
   });
 });
 
@@ -65,22 +71,22 @@ const postUpdateGenre = [
     }
     const { genreName } = req.body;
 
-    await db.updateGenre(genre.id, genreName)
+    await db.updateGenre(genre.id, genreName);
 
-    res.redirect("/genres")
-  })
-]
+    res.redirect("/genres");
+  }),
+];
 
 const postDeleteGenre = asyncHandler(async (req, res) => {
-  await db.deleteGenre(req.params.id)
-  res.redirect("/genres")
-})
+  await db.deleteGenre(req.params.id);
+  res.redirect("/genres");
+});
 
 module.exports = {
-  getAllGenres,
+  getGenres,
   getCreateGenre,
   postCreateGenre,
   getUpdateGenre,
   postUpdateGenre,
-  postDeleteGenre
+  postDeleteGenre,
 };

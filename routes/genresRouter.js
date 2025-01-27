@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const {
-  getAllGenres,
+  getGenres,
   getCreateGenre,
   postCreateGenre,
   getUpdateGenre,
@@ -10,7 +10,7 @@ const {
 
 const genresRouter = Router();
 
-genresRouter.get("/", getAllGenres);
+genresRouter.get("/", getGenres);
 
 genresRouter.get("/create", getCreateGenre);
 genresRouter.post("/create", postCreateGenre);

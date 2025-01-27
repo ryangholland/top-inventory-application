@@ -5,6 +5,14 @@ async function getAllGenres() {
   return rows;
 }
 
+async function searchGenres(searchTerm) {
+  const { rows } = await pool.query(
+    `SELECT * FROM genres WHERE name ILIKE '%' || $1 || '%'`,
+    [searchTerm]
+  );
+  return rows;
+}
+
 async function getGenreById(id) {
   const { rows } = await pool.query(`SELECT * FROM genres WHERE id = $1`, [id]);
   return rows[0];
@@ -42,6 +50,7 @@ async function deleteGenre(id) {
 
 module.exports = {
   getAllGenres,
+  searchGenres,
   getGenreById,
   insertGenre,
   updateGenre,
