@@ -3,6 +3,7 @@ const db = require("../db/queries/authors");
 const { body, validationResult } = require("express-validator");
 
 const getAuthors = asyncHandler(async (req, res) => {
+  
   let authors;
   if (req.query.search) {
     authors = await db.searchAuthors(req.query.search);

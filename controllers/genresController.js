@@ -4,11 +4,13 @@ const { body, validationResult } = require("express-validator");
 
 const getGenres = asyncHandler(async (req, res) => {
   let genres;
-  if (req.query.search) {
-    genres = await db.searchGenres(req.query.search);
+
+  if (req.query.search || req.query.sort) {
+    genres = await db.searchGenres(req.query.search, req.query.sort);
   } else {
     genres = await db.getAllGenres();
   }
+
   res.render("genres/genres", {
     title: "Genres",
     genres: genres,

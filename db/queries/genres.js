@@ -5,11 +5,25 @@ async function getAllGenres() {
   return rows;
 }
 
-async function searchGenres(searchTerm) {
-  const { rows } = await pool.query(
-    `SELECT * FROM genres WHERE name ILIKE '%' || $1 || '%'`,
-    [searchTerm]
-  );
+async function searchGenres(searchTerm, sortTerm) {
+  const validSortTerms = ["name"]; 
+  if (sortTerm && !validSortTerms.includes(sortTerm)) {
+    throw new Error("Invalid sort term");
+  }
+
+  let query = `SELECT * FROM genres`;
+  const params = [];
+
+  if (searchTerm) {
+    query += ` WHERE name ILIKE '%' || $1 || '%'`;
+    params.push(searchTerm);
+  }
+
+  if (sortTerm) {
+    query += ` ORDER BY ${sortTerm}`;
+  }
+
+  const { rows } = await pool.query(query, params);
   return rows;
 }
 

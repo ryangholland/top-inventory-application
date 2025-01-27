@@ -44,13 +44,19 @@
         </button>
       </form>
 
-      <h6 class="ms-4"><a href="/genres">Clear Search</a></h6>
+      <h6 class="ms-4"><a href="/genres">Clear Filters</a></h6>
     </div>
 
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>
+            <a
+              href="/genres?sort=name&search=<%= lastSearch %>"
+              class="link-secondary text-black link-underline-opacity-0"
+              >Name</a
+            >
+          </th>
           <th>Actions</th>
         </tr>
       </thead>
